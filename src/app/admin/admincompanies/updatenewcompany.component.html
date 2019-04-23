@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Update Company</h1>
+<form #updatecompanyform="ngForm" name="updatecompanyform" (ngSubmit)="onSubmitUpdate(updatecompanyform)">
+  <div mat-dialog-content>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+        </div>
+        <input class="validate" name="companyName" #companyName [(ngModel)]="b" class="form-control" type="text"
+          placeholder="companyName" required>
+      </div>
+      <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)" style="color:red">
+        <small *ngIf="companyName.errors.required">
+          This field is required.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+        </div>
+        <input class="validate" name="companyAddress" #companyAddress [(ngModel)]="c" class="form-control" type="text"
+          placeholder="companyAddress" required>
+      </div>
+      <div *ngIf="companyAddress.invalid && (companyAddress.dirty || companyAddress.touched)" style="color:red">
+        <small *ngIf="c">
+          This field is required.
+        </small>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="form-group">
+    <button mat-button (click)="updateClick();refresh()"
+      [disabled]='updatecompanyform.pristine || updatecompanyform.invalid' type="submit">Ok</button>
+    <button mat-button [mat-dialog-close]="">No Thanks</button>
+  </div>
+</form>

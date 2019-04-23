@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Add New Company</h1>
+<form #addcompanyform="ngForm" name="addcompanyform" (ngSubmit)="OnSubmit(addcompanyform)">
+  <div mat-dialog-content>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-building-o"></i> </span>
+        </div>
+        <input required name="companyName" #companyName="ngModel" [(ngModel)]="addcompany.companyName"
+          class="form-control" placeholder="Company name" type="text">
+      </div>
+      <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)" style="color:red">
+        <small *ngIf="companyName.errors.required">
+          This field is required.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-address-card-o"></i> </span>
+        </div>
+        <input class="validate" name="companyAddress" #companyAddress="ngModel" [(ngModel)]="addcompany.companyAddress"
+          class="form-control" placeholder="Company Address" type="text" required>
+      </div>
+      <!-- form-group// -->
+      <div *ngIf="companyAddress.invalid && (companyAddress.dirty || companyAddress.touched)" style="color:red">
+        <small *ngIf="companyAddress.errors.required">
+          This field is required.
+        </small>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="form-group">
+    <button mat-button (click)="onNoClick();refresh()" [disabled]='addcompanyform.pristine || addcompanyform.invalid'
+      type="submit">Ok</button>
+
+    <button mat-button [mat-dialog-close]="">No Thanks</button>
+  </div>
+</form>

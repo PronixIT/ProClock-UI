@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.navbar-default {
+    background-color: #f4f3ef;
+    border-bottom: 1px solid #DDDDDD;
+}
+.navbar-default .navbar-brand {
+    color: #777;
+}
+.navbar-default .navbar-nav > li > a:not(.btn) {
+    color: #9A9A9A;
+}
+.bg-light {
+    background-color: #f4f3ef!important;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    text-align: center;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+    text-align: center;
+}

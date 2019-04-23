@@ -1,0 +1,188 @@
+<div class="container-fluid" style="background-color: #f4f3ef;">
+  <form #userTimeForm="ngForm" name="userTimeForm">
+    <!-- (ngSubmit)="OnSubmit(userTimeForm)" -->
+    <div class="row">
+      <div class="col-lg-2 col-md-2 col-sm-2" style="margin-top:20px;">
+        <button type="button" class="btn btn-secondary" (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"> <span class="fa fa-chevron-left"></span> Previous
+        </button>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:20px; text-align:center">
+
+        <!-- <h5> {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5> -->
+        <p>
+          <strong> Date span
+            <span><input style="width: 156px;" type="date" class="form-control" value="date" class="validate"
+                name="startDate" #startDate [(ngModel)]="usertimepost.startDate" required /></span>
+            to
+            <span><input style="width: 156px;" type="date" class="form-control" value="date" class="validate"
+                name="endDate" #endDate [(ngModel)]="usertimepost.endDate" required /></span>
+          </strong>
+        </p>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-2" style="margin-top:20px; text-align:right">
+        <button type="button" class="btn btn-secondary" (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Next <span class="fa fa-chevron-right"></span>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Time Sheet</h4>
+            <!-- <form action="" class="search-form">
+              <div class="form-group has-feedback"
+                style="margin-bottom: 10px;margin-top: -41px;margin-left: 56px !important;margin-right: 51px;">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                <i class="fa fa-search searchvalue"></i>
+              </div>
+            </form> -->
+            <div class="card-text">
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                  <thead class="table-active">
+                    <tr>
+                      <!-- {{ activeDayIsOpen | date:'EEEE, d'}}{{ viewDate | date:'EEEE, d'}} -->
+                      <td>Project Name</td>
+                      <td>Monday</td>
+                      <td>Tuesday</td>
+                      <td>Wednesday</td>
+                      <td>Thursday</td>
+                      <td>Friday</td>
+                      <td>Saturday</td>
+                      <td>Sunday</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <select class="form-control" #projectName="ngModel" class="validate" (change)="selectedCompanyId()"
+                          name="projectName" [(ngModel)]="selectedOption" required>
+                          <option [ngValue]="undefined" disabled>Select projectName </option>
+                          <option *ngFor="let project of projectlist" [ngValue]="project">
+                            {{project.projectName}}
+                          </option>
+                        </select>
+                        <div *ngIf="projectName.invalid && (projectName.dirty || projectName.touched)"
+                          style="color:red">
+                          <small *ngIf="projectName.errors.required">
+                            Please select the any Field.
+                          </small>
+                        </div>
+                      </td>
+                      <td><input type="number" class="form-control" value="0Hrs" class="validate" name="monday" #monday
+                          [(ngModel)]="usertimepost.monday" required /></td>
+                      <td><input type="number" class="form-control" value="0Hrs" class="validate" name="tuesday"
+                          #tuesday [(ngModel)]="usertimepost.tuesday" required /></td>
+                      <td><input type="number" class="form-control" value="0Hrs" class="validate" name="wednesday"
+                          #wednesday [(ngModel)]="usertimepost.wednesday" required /></td>
+                      <td><input type="number" class="form-control" value="0Hrs" class="validate" name="thursday"
+                          #thursday [(ngModel)]="usertimepost.thursday" required /></td>
+                      <td><input type="number" class="form-control" value="0Hrs" class="validate" name="friday" #friday
+                          [(ngModel)]="usertimepost.friday" required /></td>
+                      <td><input type="number" class="form-control" value="0Hrs" class="validate" name="saturday"
+                          #saturday [(ngModel)]="usertimepost.saturday" required /></td>
+                      <td><input type="number" class="form-control" value="0Hrs" class="validate" name="sunday" #sunday
+                          [(ngModel)]="usertimepost.sunday" required /></td>
+                    </tr>
+                    <tr>
+                      <td colspan="6">Total Hours</td>
+                      <td colspan="2">
+                        {{usertimepost.monday+usertimepost.tuesday+usertimepost.wednesday+usertimepost.thursday+usertimepost.friday+usertimepost.saturday+usertimepost.sunday}}hrs
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-sm-12" style="padding-bottom: 20px">
+        <div style="margin-top:20px; text-align:center">
+          <button [disabled]="!userTimeForm.valid" (click)="OnSubmit(userTimeForm); refresh()" type="button"
+            class="btn btn-primary">
+            <!-- [disabled]="!userTimeForm.valid" -->
+            Save
+          </button>
+          <button type="button" class="btn btn-secondary" style="margin-left: 20px">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container-fluid" style="background-color: #f4f3ef;">
+  <div class="row" style="background-color: #f4f3ef; margin-bottom: 70px">
+    <!-- <div class="col-md-12">
+      <div class="col-lg-2 col-md-2 col-sm-2" style="margin-top:20px;">
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:20px; text-align:center">
+        <p>
+          <strong> Time span
+            <span></span>
+            to
+            <span></span>
+          </strong>
+        </p>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-2" style="margin-top:20px; text-align:right">
+      </div>
+    </div> -->
+    <div class="col-12 col-md-12">
+      <div class="card" *ngFor="let user of viewsheet">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center">Time Sheets {{user.startDate | date:'mediumDate'}} - {{user.endDate | date:'mediumDate'}}</h5>
+          <!-- <form action="" class="search-form">
+              <div class="form-group has-feedback"
+                style="margin-bottom: 10px;margin-top: -41px;margin-left: 56px !important;margin-right: 51px;">
+                <label for="search" class="sr-only">Search</label>
+                <input type="date" class="form-control" name="search" id="search" placeholder="search">
+                <i class="fa fa-search searchvalue"></i>
+              </div>
+            </form> -->
+          <div class="card-text">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm">
+                <thead class="table-active">
+                  <tr>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                    <th>Start</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{user.monday}}</td>
+                    <td>{{user.tuesday}}</td>
+                    <td>{{user.wednesday}}</td>
+                    <td>{{user.thursday}}</td>
+                    <td>{{user.friday}}</td>
+                    <td>{{user.saturday}}</td>
+                    <td>{{user.sunday}}</td>
+                    <td>{{user.startDate | date:'mediumDate'}} - {{user.endDate | date:'mediumDate'}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5">Total Hours</td>
+                    <td colspan="3">
+                      {{user.monday + user.tuesday + user.wednesday + user.thursday+user.friday + user.saturday + user.sunday}}hrs
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<h1 mat-dialog-title>Add New Empolyee</h1>
+<form name="addnewemployeeForm" #addnewemployeeForm="ngForm" (ngSubmit)="OnSubmit(addnewemployeeForm)">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>
+      <input required minlength="3" name="firstName" #firstName="ngModel" [(ngModel)]="addemployee.firstName"
+        class="form-control" placeholder="First name" type="text">
+    </div>
+    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" style="color:red">
+      <small *ngIf="firstName.errors.required">
+        This field is required.
+      </small>
+      <small *ngIf="firstName.errors.minlength">
+        firstName must be at least 3 characters.
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>
+      <input class="validate" name="lastName" #lastName="ngModel" [(ngModel)]="addemployee.lastName"
+        class="form-control" placeholder="Last name" type="text" required>
+    </div>
+    <!-- form-group// -->
+    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" style="color:red">
+      <small *ngIf="lastName.errors.required">
+        This field is required.
+      </small>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>
+      <input class="validate" name="userName" #userName="ngModel" [(ngModel)]="addemployee.userName"
+        class="form-control" placeholder="User name" type="text" required>
+    </div>
+    <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" style="color:red">
+      <small *ngIf="userName.errors.required">
+        This field is required.
+      </small>
+    </div>
+  </div>
+  <!-- form-group// -->
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+      </div>
+      <input class="validate" name="emailId" #emailId="ngModel" [(ngModel)]="addemployee.emailId" class="form-control"
+        placeholder="Email address" type="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+    </div>
+    <div style="color:red" *ngIf="emailId.invalid && (emailId.dirty || emailId.touched)">
+      <small *ngIf="emailId.errors && emailId.errors.required">
+        Email is required
+      </small>
+      <small *ngIf="emailId.errors && emailId.errors.pattern">
+        Email is invalid
+      </small>
+    </div>
+  </div>
+  <!-- form-group// -->
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+      </div>
+      <input class="validate" name="phoneNo" #phoneNo="ngModel" [(ngModel)]="addemployee.phoneNo" class="form-control"
+        placeholder="Phone number" type="text" maxlength="10" required pattern="[123456789][0-9]{9}">
+    </div>
+    <div style="color:red" *ngIf="phoneNo.invalid && (phoneNo.dirty || phoneNo.touched)">
+      <small *ngIf="phoneNo.errors && phoneNo.errors.required">
+        phone Number is required
+      </small>
+      <small *ngIf="phoneNo.errors && phoneNo.errors.pattern">
+        phone Number is invalid
+      </small>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>
+      <select class="form-control" #companyName="ngModel" (change)="selectedCompanyId()" name="companyName"
+        [(ngModel)]="selectedOption1" required>
+        <option [ngValue]="undefined" disabled>Select CompanyName </option>
+        <option *ngFor="let companies of companieslist" [ngValue]="companies">{{companies.companyName}}</option>
+      </select>
+    </div>
+    <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)" style="color:red">
+      <small *ngIf="companyName.errors.required">
+        Please select the any Field.
+      </small>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>
+      <select class="form-control" #projectName="ngModel" (change)="selectedProjectId()" name="projectName"
+        [(ngModel)]="selectedOption2" required>
+        <option [ngValue]="undefined" disabled>Select ProjectName </option>
+        <option *ngFor="let project of projectlist" [ngValue]="project">{{project.projectName}}</option>
+      </select>
+    </div>
+    <div *ngIf="projectName.invalid && (projectName.dirty || projectName.touched)" style="color:red">
+      <small *ngIf="projectName.errors.required">
+        Please select the any Field.
+      </small>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>
+      <select class="form-control" (change)="selectedmanagerId()" #managerName="ngModel" name="managerName"
+        [(ngModel)]="selectedOption3" required>
+        <option [ngValue]="undefined" disabled>Select managerName </option>
+        <option *ngFor="let manager of managerlist" [ngValue]="manager">{{manager.managerName}}</option>
+      </select>
+    </div>
+    <div *ngIf="managerName.invalid && (managerName.dirty || managerName.touched)" style="color:red">
+      <small *ngIf="managerName.errors.required">
+        Please select the any Field.
+      </small>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <div class="form-group">
+      <button mat-button [disabled]='addnewemployeeForm.pristine || addnewemployeeForm.invalid' type="submit"
+        (click)="onNoClick();refresh()"> Ok</button>
+    </div>
+    <button mat-button [mat-dialog-close]="">No Thanks</button>
+  </div>
+</form>

@@ -1,0 +1,71 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>User Status Report</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <div class="card-text">
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+              <thead class="table-active">
+                <tr>
+                  <th>companyName</th>
+                  <th>employeeName</th>
+                  <th>joiningDate</th>
+                  <th>noOfWeeks</th>
+                  <th>Edit</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let element of userstatus">
+                <tr>
+                  <td>{{element.companyName}}</td>
+                  <td>{{element.employeeName}}</td>
+                  <td>{{element.joiningDate}}</td>
+                  <td>{{element.noOfWeeks}}</td>
+                  <td><button type="button" class="btn btn-danger" mat-raised-button
+                      (click)="receipt(element);openEditDialog()"> <i class="fa fa-pencil-square-o"
+                        style="font-size:18px"></i>Send Reminder</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card style="margin-top: 20px;">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Manager Status Report</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="card-text">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm">
+                <thead class="table-active">
+                  <tr>
+                    <th>companyName</th>
+                    <th>managerName</th>
+                    <th>noOfWeeks</th>
+                    <th>projectname</th>
+                    <th>vendorName</th>
+                    <th>Edit</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let element of managerstatus">
+                  <tr>
+                    <td>{{element.companyName}}</td>
+                    <td>{{element.managerName}}</td>
+                    <td>{{element.noOfWeeks}}</td>
+                    <td>{{element.projectname}}</td>
+                    <th>{{element.vendorName}}</th>
+                    <td><button type="button" class="btn btn-danger" mat-raised-button
+                        (click)="receipt(element);openEditDialog()"> <i class="fa fa-pencil-square-o"
+                          style="font-size:18px"></i>Send Reminder</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </mat-card-content>
+  </mat-card>

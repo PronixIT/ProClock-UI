@@ -1,0 +1,53 @@
+<div class="container" style="margin-top: 24px; margin-bottom: 50px;">
+  <h4>Project Details</h4><br>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="form-control-label col-sm-2" for="pwd">Company Name :</label>
+      <label class="form-control-label col-sm-1"> {{b}}</label>
+      <br>
+      <label class="form-control-label col-sm-2" for="pwd">Address :</label>
+      <label class="form-control-label col-sm-1"> {{c}}</label>
+    </div>
+  </form>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h4>Projects</h4>
+      </mat-card-title>
+      <button type="button" class="btn btn-primary" mat-raised-button (click)="openDialog()"><i class="fa fa-plus"
+          style="font-size:14px; padding-right: 9px"> Add New</i></button>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="card-text">
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm">
+            <thead class="table-active">
+              <tr>
+                <th>projectName</th>
+                <th>projectCode</th>
+                <th>projectVendor</th>
+                <th>projectStartDate</th>
+                <th>projectDuration</th>
+                <th>description</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let element of projectlist">
+              <tr>
+                <td (click)="managerview(element);" style="color:blue !important">{{element.projectName}}</td>
+                <td>{{element.projectCode}}</td>
+                <td>{{element.projectVendor}}</td>
+                <td>{{element.projectStartDate}}</td>
+                <td>{{element.projectDuration}}</td>
+                <td>{{element.description}}</td>
+                <td><button type="button" class="btn btn-danger" mat-raised-button
+                    (click)="receipt(element);openEditDialog()"> <i class="fa fa-pencil-square-o"
+                      style="font-size:18px"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

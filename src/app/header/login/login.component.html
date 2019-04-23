@@ -1,0 +1,52 @@
+<div class="card bg-light" style="margin-top:55px;">
+  <article class="card-body mx-auto" style="max-width: 400px;">
+    <h4 class="card-title mt-3 text-center">ProClock Login</h4>
+    <form #loginForm="ngForm" name="loginForm" (ngSubmit)="OnSubmit(loginForm)">
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+          </div>
+          <input placeholder="Email" class="validate" name="emailId" #emailId ngModel class="form-control" type="email"
+            required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        </div>
+        <div style="color:red" *ngIf="emailId.invalid && (emailId.dirty || emailId.touched)">
+          <small *ngIf="emailId.errors && emailId.errors.required">
+            Email is required
+          </small>
+          <small *ngIf="emailId.errors && emailId.errors.pattern">
+            Email is invalid
+          </small>
+        </div>
+      </div>
+
+      <!-- form-group// -->
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input class="form-control" placeholder="password" type="password" #password ngModel name="password" required
+            minlength="5">
+          <!-- pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/" -->
+        </div>
+        <div style="color:red" *ngIf="password.invalid && (password.dirty || password.touched)">
+          <small *ngIf="password.errors && password.errors.required">
+            Password is required
+          </small>
+          <small *ngIf="password.errors && password.errors.pattern">
+            at least one number, one lowercase and one uppercase letter and five characters
+          </small>
+        </div>
+      </div>
+      <!-- form-group// -->
+      <div class="form-group">
+        <button [disabled]="loginForm.pristine || loginForm.invalid" type="submit"
+          class="btn btn-secondary btn-block">Login</button>
+      </div> <!-- form-group// -->
+      <p class="text-center">Do not have account? <a [routerLink]="'/generatepsd'" class="text-secondary"><strong>Forgot
+            password</strong></a> </p>
+    </form>
+  </article>
+</div> <!-- card.// -->
+<!--container end.//-->
